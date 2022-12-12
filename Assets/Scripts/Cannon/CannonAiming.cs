@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class CannonAiming : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class CannonAiming : MonoBehaviour
 
     float _inputX = 0;
     float _inputY = 0;
+
+    private void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        Handles.color = Color.red;
+        Handles.DrawWireArc(transform.position, transform.up, transform.forward, _rotationArc / 2, 3);
+        Handles.DrawWireArc(transform.position, transform.up, transform.forward, -(_rotationArc / 2), 3);
+#endif
+    }
 
     private void Update()
     {
